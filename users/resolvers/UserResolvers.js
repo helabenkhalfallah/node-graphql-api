@@ -1,5 +1,6 @@
 import {
-  UserProvider
+  UserProvider,
+  PostProvider,
 } from '../../database';
 
 const {
@@ -7,8 +8,11 @@ const {
   userByEmail,
   addUser,
   updateUser,
-  addPost,
 } = UserProvider;
+
+const {
+  addPost,
+} = PostProvider;
 
 const UserResolvers = {
   Query: {
