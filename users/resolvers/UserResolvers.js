@@ -7,6 +7,7 @@ const {
   userByEmail,
   addUser,
   updateUser,
+  addPost,
 } = UserProvider;
 
 const UserResolvers = {
@@ -19,6 +20,7 @@ const UserResolvers = {
     addUser: (_, params, context) => addUser(_, params, context),
     updateUser: (_, params, context) => updateUser(_, params, context),
     deleteUser: (_,  { email }, context) => null,
+    addPost: (_, params, context) => addPost(_, params, context),
   }
 };
 

@@ -3,8 +3,8 @@ const PostType = `
   type PostType {
     id: ID!
     text: String!
+    user: String!
     createdAt: DateTime!
-    user: UserType!
   }
 `
 

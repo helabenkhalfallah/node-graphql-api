@@ -1,8 +1,46 @@
 import User from '../schemas/User';
+import Post from '../schemas/Post';
+
+const addPost = async(_, params, context) => {
+  try {
+    const {
+      text,
+      user,
+    } = params || {};
+    if(text && text.length 
+       && user && user.length){
+        const postModel = new Post({
+          text,
+          user,
+        });
+        return await postModel.save();
+    }
+    throw new Error('user and text are required field !');
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+const getPostsByUser = async (email) => {
+  try {
+    const posts = await Post.find({ user: email }).exec();
+    return posts;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
 
 const getUsers = async () => {
   try {
-    const users = User.find().exec();
+    const users = await User.find().exec();
+    if(users && users.length){
+      users.forEach(user => {
+        const {
+          email,
+        } = user;
+       user.posts = getPostsByUser(email);
+      });
+    }
     return users;
   } catch (error) {
     throw new Error(error);
@@ -12,6 +50,12 @@ const getUsers = async () => {
 const userByEmail = async (_, email, context) => {
   try {
     const user = await User.findOne({ email: email }).exec();
+    if(user){
+      const {
+        email,
+      } = user;
+      user.posts = getPostsByUser(email);
+    }
     return user;
   } catch (error) {
     throw new Error(error);
@@ -47,7 +91,7 @@ const addUser = async (_, params, context) => {
           username,
           password,
         });
-        return userModel.save();
+        return await userModel.save();
     }
     throw new Error('lastName, lastName, username, email and password are required field !');
   } catch (error) {
@@ -78,7 +122,7 @@ const updateUser = async (_, params, context) => {
         user.birthday = birthday;
         user.phone = phone;
         user.username = username;
-        return user.save();
+        return await user.save();
     }
     throw new Error('lastName, lastName, username and email are required field !');
   } catch (error) {
@@ -91,6 +135,7 @@ const UserProvider = {
   userByEmail,
   addUser,
   updateUser,
+  addPost,
 };
 
 export default UserProvider;

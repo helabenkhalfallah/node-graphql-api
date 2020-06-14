@@ -9,6 +9,7 @@ const UserType = `
     email: String!
     username: String!
     password: String!
+    posts: [PostType]
   }
 `
 
