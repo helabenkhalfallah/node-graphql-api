@@ -36,6 +36,7 @@ const resolvers = {
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
+// https://github.com/the-road-to-graphql/fullstack-apollo-express-mongodb-boilerplate/blob/master/src/index.js#L54
 const server = new ApolloServer({ typeDefs, resolvers });
 
 // The `listen` method launches a web server.
