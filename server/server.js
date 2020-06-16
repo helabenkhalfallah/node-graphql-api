@@ -11,9 +11,6 @@ import {
   DBConnect,
 }from '../database';
 
-// db connect
-DBConnect();
-
 const typeDefs = gql`
   # custom type
   scalar DateTime
@@ -34,13 +31,19 @@ const resolvers = {
   ...UserResolvers,
 };
 
-// The ApolloServer constructor requires two parameters: your schema
-// definition and your set of resolvers.
-// https://github.com/the-road-to-graphql/fullstack-apollo-express-mongodb-boilerplate/blob/master/src/index.js#L54
-const server = new ApolloServer({ typeDefs, resolvers });
+DBConnect
+.then(() => {
+  // The ApolloServer constructor requires two parameters: your schema
+  // definition and your set of resolvers.
+  // https://github.com/the-road-to-graphql/fullstack-apollo-express-mongodb-boilerplate/blob/master/src/index.js#L54
+  const server = new ApolloServer({ typeDefs, resolvers });
 
-// The `listen` method launches a web server.
-const portNumber = process.env.GRAPHQL_APP_PORT || 4000
-server.listen(portNumber).then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+  // The `listen` method launches a web server.
+  const portNumber = process.env.GRAPHQL_APP_PORT || 4000
+  server.listen(portNumber).then(({ url }) => {
+    console.log(`🚀  Server ready at ${url}`);
+  });
+})
+.catch((error) => {
+  console.log('an error occured while starting DB  : ', error);
 });

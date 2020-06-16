@@ -10,6 +10,8 @@ const UserType = `
     username: String!
     password: String!
     posts: [PostType]
+    isConnected: Boolean!
+    numberOfFollowers: Int!
   }
 `
 

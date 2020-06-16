@@ -28,6 +28,14 @@ let userSchema = mongoose.Schema(
     },
     birthday: String,
     phone: String,
+    isConnected: {
+      type: Boolean,
+      default: false,
+    },
+    numberOfFollowers: {
+      type: Number,
+      default: 0,
+    }
   },
   {
     collection: 'User'
