@@ -4,17 +4,24 @@ let userSchema = mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: true // required
+      required: [true, "First Name required"]
     },
     lastName: {
       type: String,
-      required: true // required
+      required: [true, "Last Name required"]
     },
     email: {
       type: String,
-      required: true, // required
-      unique: true, // unique email
-      trim: true
+      trim: true,
+      lowercase: true,
+      unique: true, // unique mail
+      validate: {
+            validator: function(v) {
+                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+            },
+            message: "Please enter a valid email!"
+      },
+      required: [true, "Email required"]
     },
     password: {
       type: String,
@@ -23,11 +30,15 @@ let userSchema = mongoose.Schema(
     username: {
       type: String,
       unique: true, // unique username
-      required: true, // required
+      required: [true, "Last Name required"],
       trim: true
     },
-    birthday: String,
-    phone: String,
+    birthday: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
     isConnected: {
       type: Boolean,
       default: false,

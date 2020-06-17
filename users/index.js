@@ -3,6 +3,7 @@ import PostType from './types/PostType';
 import UserTypeQueries from './types/UserTypeQueries';
 import UserTypeMutations from './types/UserTypeMutations';
 import UserResolvers from './resolvers/UserResolvers';
+import UpperCaseDirective from './directives/UpperCaseDirective';
 
 export{
   UserType,
@@ -10,4 +11,5 @@ export{
   UserTypeQueries,
   UserTypeMutations,
   UserResolvers,
+  UpperCaseDirective,
 }

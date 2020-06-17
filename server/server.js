@@ -6,12 +6,15 @@ import {
   UserTypeQueries,
   UserTypeMutations,
   UserResolvers,
+  UpperCaseDirective,
 }from '../users';
 import {
   DBConnect,
 }from '../database';
 
 const typeDefs = gql`
+  directive @upper on FIELD_DEFINITION
+
   # custom type
   scalar DateTime
 
@@ -31,12 +34,18 @@ const resolvers = {
   ...UserResolvers,
 };
 
-DBConnect
+DBConnect()
 .then(() => {
   // The ApolloServer constructor requires two parameters: your schema
   // definition and your set of resolvers.
   // https://github.com/the-road-to-graphql/fullstack-apollo-express-mongodb-boilerplate/blob/master/src/index.js#L54
-  const server = new ApolloServer({ typeDefs, resolvers });
+  const server = new ApolloServer({ 
+    typeDefs,
+    resolvers,
+    schemaDirectives: {
+      upper: UpperCaseDirective,
+    }
+  });
 
   // The `listen` method launches a web server.
   const portNumber = process.env.GRAPHQL_APP_PORT || 4000

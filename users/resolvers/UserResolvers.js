@@ -22,6 +22,7 @@ const UserResolvers = {
   
   Mutation: {
     addUser: (_, params, context) => addUser(_, params, context),
+    addUser1: (_, params, context) => addUser(_, params.user, context),
     updateUser: (_, params, context) => updateUser(_, params, context),
     deleteUser: (_,  { email }, context) => null,
     addPost: (_, params, context) => addPost(_, params, context),

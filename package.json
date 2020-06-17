@@ -23,6 +23,7 @@
     "apollo-server": "^2.14.4",
     "dotenv": "^8.2.0",
     "graphql": "^15.1.0",
+    "graphql-constraint-directive": "^2.0.3",
     "graphql-iso-date": "^3.6.1",
     "mongoose": "^5.9.18"
   },
