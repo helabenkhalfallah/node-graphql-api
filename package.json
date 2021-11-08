@@ -20,7 +20,7 @@
   "homepage": "https://github.com/helabenkhalfallah/node-graphql-api#readme",
   "dependencies": {
     "@babel/runtime": "^7.10.2",
-    "apollo-server": "^2.14.4",
+    "apollo-server": "^2.25.3",
     "dotenv": "^8.2.0",
     "graphql": "^15.1.0",
     "graphql-constraint-directive": "^2.0.3",
